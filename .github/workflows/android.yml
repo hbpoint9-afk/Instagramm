@@ -8,9 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -20,25 +22,36 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
-      - uses: actions/setup-java@v4
+      - name: Debug files
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "======================"
+          echo "Android files:"
+          find android -maxdepth 2 -type f | sort
+          echo "======================"
+          echo "Plugin directory:"
+          ls -la android/capacitor-cordova-android-plugins || true
+          echo "======================"
+          echo "cordova.variables.gradle:"
+          cat android/capacitor-cordova-android-plugins/cordova.variables.gradle || true
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
 
-      - uses: android-actions/setup-android@v3
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: Grant execute permission
         run: chmod +x android/gradlew
-      - name: Debug files
-        run: |
-          pwd
-          ls -R android
-          ls -l android/capacitor-cordova-android-plugins
-          cat android/capacitor-cordova-android-plugins/cordova.variables.gradle
+
       - name: Build Debug APK
         run: |
           cd android
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
