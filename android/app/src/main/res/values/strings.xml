@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Instagramm</string>
+    <string name="title_activity_main">Instagramm</string>
+    <string name="package_name">com.login.instagramm</string>
+    <string name="custom_url_scheme">com.login.instagramm</string>
+</resources>
