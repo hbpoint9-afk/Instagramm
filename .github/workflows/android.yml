@@ -29,7 +29,12 @@ jobs:
 
       - name: Grant execute permission
         run: chmod +x android/gradlew
-
+      - name: Debug files
+        run: |
+          pwd
+          ls -R android
+          ls -l android/capacitor-cordova-android-plugins
+          cat android/capacitor-cordova-android-plugins/cordova.variables.gradle
       - name: Build Debug APK
         run: |
           cd android
