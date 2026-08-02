@@ -14,30 +14,24 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "22"
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install -D @capacitor/assets
+
+      - name: Generate app icons
+        run: npx @capacitor/assets generate
 
       - name: Sync Capacitor
         run: npx cap sync android
-
-      - name: Debug files
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "======================"
-          find android -maxdepth 2 -type f | sort
-          echo "======================"
-          ls -la android/capacitor-cordova-android-plugins || true
-          echo "======================"
-          cat android/capacitor-cordova-android-plugins/cordova.variables.gradle || true
 
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: "21"
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
@@ -48,7 +42,7 @@ jobs:
       - name: Build Debug APK
         run: |
           cd android
-          ./gradlew assembleDebug --stacktrace
+          ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
