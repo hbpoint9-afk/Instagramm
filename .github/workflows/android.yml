@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '22'
 
       - name: Install dependencies
         run: npm install
@@ -27,13 +27,10 @@ jobs:
           echo "Current directory:"
           pwd
           echo "======================"
-          echo "Android files:"
           find android -maxdepth 2 -type f | sort
           echo "======================"
-          echo "Plugin directory:"
           ls -la android/capacitor-cordova-android-plugins || true
           echo "======================"
-          echo "cordova.variables.gradle:"
           cat android/capacitor-cordova-android-plugins/cordova.variables.gradle || true
 
       - name: Setup Java
